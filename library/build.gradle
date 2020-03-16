@@ -1,5 +1,5 @@
 apply plugin: 'com.android.library'
-apply plugin: "com.mobbeel.plugin"
+//apply plugin: "com.mobbeel.plugin"
 
 ext {
  //   PUBLISH_GROUP_ID = 'com.applandeo'
@@ -32,9 +32,9 @@ android {
     }
 }
 
-aarPlugin {
+/*aarPlugin {
     includeAllInnerDependencies true  // It's false for default
-}
+}*/
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
