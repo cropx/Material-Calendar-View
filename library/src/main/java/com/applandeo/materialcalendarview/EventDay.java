@@ -20,6 +20,7 @@ import java.util.Calendar;
 public class EventDay {
     private Calendar mDay;
     private Object mDrawable;
+    private Object mBottomDrawable;
     private int mLabelColor;
     private boolean mIsDisabled;
 
@@ -49,6 +50,14 @@ public class EventDay {
         mDay = day;
         mDrawable = drawable;
     }
+
+    public EventDay(Calendar day, Drawable drawable,Drawable bottomdrawable) {
+        DateUtils.setMidnight(day);
+        mDay = day;
+        mDrawable = drawable;
+        mBottomDrawable=bottomdrawable;
+    }
+
 
     /**
      * @param day        Calendar object which represents a date of the event
@@ -83,6 +92,12 @@ public class EventDay {
     public Object getImageDrawable() {
         return mDrawable;
     }
+
+    @RestrictTo(RestrictTo.Scope.LIBRARY)
+    public Object getImageBottomDrawable() {
+        return mBottomDrawable;
+    }
+
 
     /**
      * @return Color which will be displayed as row label text color
