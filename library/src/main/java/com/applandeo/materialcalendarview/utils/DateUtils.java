@@ -9,6 +9,8 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import static java.util.Calendar.MONDAY;
+
 /**
  * Created by Mateusz Kornakiewicz on 23.05.2017.
  */
@@ -21,6 +23,7 @@ public class DateUtils {
     public static Calendar getCalendar() {
         Calendar calendar = Calendar.getInstance();
         setMidnight(calendar);
+        calendar.setFirstDayOfWeek(MONDAY);
 
         return calendar;
     }
