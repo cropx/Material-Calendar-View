@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.annimon.stream.Stream;
@@ -59,14 +60,41 @@ class CalendarDayAdapter extends ArrayAdapter<Date> {
         TextView dayLabel = (TextView) view.findViewById(R.id.dayLabel);
         ImageView dayIcon = (ImageView) view.findViewById(R.id.dayIcon);
         ImageView dayIcon2 = (ImageView) view.findViewById(R.id.dayIcon2);
+        TextView value = (TextView) view.findViewById(R.id.valueLabel);
+        LinearLayout container = (LinearLayout) view.findViewById(R.id.dayContainer);
 
         Calendar day = new GregorianCalendar();
         day.setTime(getItem(position));
 
-        // Loading an image of the event
-        if (dayIcon != null) {
-            loadIcon(dayIcon,dayIcon2, day);
+
+        if (mCalendarProperties.getEventDays() == null || !mCalendarProperties.getEventsEnabled()) {
+            dayIcon.setVisibility(View.GONE);
+            return view;
         }
+
+        Stream.of(mCalendarProperties.getEventDays()).filter(eventDate ->
+                eventDate.getCalendar().equals(day)).findFirst().executeIfPresent(eventDay -> {
+
+            if (eventDay.getImageDrawable() != null) {
+                loadIcon(dayIcon, day, eventDay.getImageDrawable());
+            }else {
+                dayIcon.setVisibility(View.GONE);
+            }
+            if (eventDay.getImageBottomDrawable() != null) {
+                loadIcon(dayIcon2, day, eventDay.getImageBottomDrawable());
+            }else {
+                dayIcon2.setVisibility(View.GONE);
+            }
+
+            if (eventDay.getValue() != null) {
+                value.setText(eventDay.getValue());
+            }else {
+                value.setVisibility(View.GONE);
+            }
+        });
+
+
+
 
         setLabelColors(dayLabel, day);
 
@@ -128,23 +156,12 @@ class CalendarDayAdapter extends ArrayAdapter<Date> {
         return !mCalendarProperties.getDisabledDays().contains(day);
     }
 
-    private void loadIcon(ImageView dayIcon, ImageView dayIcon2, Calendar day) {
-        if (mCalendarProperties.getEventDays() == null || !mCalendarProperties.getEventsEnabled()) {
-            dayIcon.setVisibility(View.GONE);
-            return;
+    private void loadIcon(ImageView dayIcon, Calendar day,Object myDrawable) {
+        ImageUtils.loadImage(dayIcon, myDrawable);
+
+        // If a day doesn't belong to current month then image is transparent
+        if (!isCurrentMonthDay(day) || !isActiveDay(day)) {
+            dayIcon.setAlpha(0.12f);
         }
-
-        Stream.of(mCalendarProperties.getEventDays()).filter(eventDate ->
-                eventDate.getCalendar().equals(day)).findFirst().executeIfPresent(eventDay -> {
-
-            ImageUtils.loadImage(dayIcon, eventDay.getImageDrawable());
-            ImageUtils.loadImage(dayIcon2, eventDay.getImageBottomDrawable());
-
-            // If a day doesn't belong to current month then image is transparent
-            if (!isCurrentMonthDay(day) || !isActiveDay(day)) {
-                dayIcon.setAlpha(0.12f);
-            }
-
-        });
     }
 }

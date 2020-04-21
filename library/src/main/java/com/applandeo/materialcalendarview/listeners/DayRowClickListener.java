@@ -186,7 +186,7 @@ public class DayRowClickListener implements AdapterView.OnItemClickListener {
     }
 
     private void createEmptyEventDay(Calendar day) {
-        EventDay eventDay = new EventDay(day);
+        EventDay eventDay = new EventDay(day,0L);
         callOnClickListener(eventDay);
     }
 

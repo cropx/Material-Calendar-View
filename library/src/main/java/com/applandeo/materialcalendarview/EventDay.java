@@ -22,12 +22,15 @@ public class EventDay {
     private Object mDrawable;
     private Object mBottomDrawable;
     private int mLabelColor;
+    private long id;
+    private String value;
     private boolean mIsDisabled;
 
     /**
      * @param day Calendar object which represents a date of the event
      */
-    public EventDay(Calendar day) {
+    public EventDay(Calendar day,Long id) {
+        this.id = id;
         mDay = day;
     }
 
@@ -35,27 +38,39 @@ public class EventDay {
      * @param day      Calendar object which represents a date of the event
      * @param drawable Drawable resource which will be displayed in a day cell
      */
-    public EventDay(Calendar day, @DrawableRes int drawable) {
+    public EventDay(Calendar day, @DrawableRes int drawable,Long id) {
+        this.id = id;
         DateUtils.setMidnight(day);
-        mDay = day;
         mDrawable = drawable;
+        mDay = day;
+
     }
 
     /**
      * @param day      Calendar object which represents a date of the event
      * @param drawable Drawable which will be displayed in a day cell
      */
-    public EventDay(Calendar day, Drawable drawable) {
+    public EventDay(Calendar day, Drawable drawable,Long id) {
+        this.id = id;
         DateUtils.setMidnight(day);
         mDay = day;
         mDrawable = drawable;
     }
 
-    public EventDay(Calendar day, Drawable drawable,Drawable bottomdrawable) {
+    public EventDay(Calendar day, Drawable drawable,Drawable bottomdrawable,Long id) {
+        this.id = id;
         DateUtils.setMidnight(day);
         mDay = day;
         mDrawable = drawable;
         mBottomDrawable=bottomdrawable;
+    }
+
+    public EventDay(Calendar day, Drawable drawable,String valueText,Long id) {
+        this.id = id;
+        DateUtils.setMidnight(day);
+        mDay = day;
+        mDrawable = drawable;
+        value=valueText;
     }
 
 
@@ -64,7 +79,8 @@ public class EventDay {
      * @param drawable   Drawable resource which will be displayed in a day cell
      * @param labelColor Color which will be displayed as label text color a day cell
      */
-    public EventDay(Calendar day, @DrawableRes int drawable , int labelColor) {
+    public EventDay(Calendar day, @DrawableRes int drawable , int labelColor,Long id) {
+        this.id = id;
         DateUtils.setMidnight(day);
         mDay = day;
         mDrawable = drawable;
@@ -77,13 +93,21 @@ public class EventDay {
      * @param drawable   Drawable which will be displayed in a day cell
      * @param labelColor Color which will be displayed as label text color a day cell
      */
-    public EventDay(Calendar day, Drawable drawable , int labelColor) {
+    public EventDay(Calendar day, Drawable drawable , int labelColor,Long id) {
+        this.id = id;
         DateUtils.setMidnight(day);
         mDay = day;
         mDrawable = drawable;
         mLabelColor = labelColor;
     }
 
+    public long getId() {
+        return id;
+    }
+
+    public String getValue() {
+        return value;
+    }
 
     /**
      * @return An image resource which will be displayed in the day row
