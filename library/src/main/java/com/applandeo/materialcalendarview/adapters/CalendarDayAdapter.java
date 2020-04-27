@@ -68,7 +68,6 @@ class CalendarDayAdapter extends ArrayAdapter<Date> {
 
 
         if (mCalendarProperties.getEventDays() == null || !mCalendarProperties.getEventsEnabled()) {
-            dayIcon.setVisibility(View.GONE);
             return view;
         }
 
@@ -77,19 +76,14 @@ class CalendarDayAdapter extends ArrayAdapter<Date> {
 
             if (eventDay.getImageDrawable() != null) {
                 loadIcon(dayIcon, day, eventDay.getImageDrawable());
-            }else {
-                dayIcon.setVisibility(View.GONE);
             }
+
             if (eventDay.getImageBottomDrawable() != null) {
                 loadIcon(dayIcon2, day, eventDay.getImageBottomDrawable());
-            }else {
-                dayIcon2.setVisibility(View.GONE);
             }
 
             if (eventDay.getValue() != null) {
                 value.setText(eventDay.getValue());
-            }else {
-                value.setVisibility(View.GONE);
             }
         });
 
