@@ -3,6 +3,11 @@ package com.applandeo.materialcalendarsampleapp;
 import android.graphics.Color;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.BackgroundColorSpan;
+import android.text.style.ForegroundColorSpan;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -30,8 +35,12 @@ public class CalendarActivity extends AppCompatActivity {
 
         List<EventDay> events = new ArrayList<>();
 
+        SpannableString spannableString = new SpannableString("50.00");
+        ForegroundColorSpan backgroundSpan = new ForegroundColorSpan(Color.YELLOW);
+        spannableString.setSpan(backgroundSpan, 0, spannableString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
         Calendar calendar = Calendar.getInstance();
-        events.add(new EventDay(calendar, DrawableUtils.getCircleDrawableWithText(this, "M"),"50.00",0L));
+        events.add(new EventDay(calendar, DrawableUtils.getCircleDrawableWithText(this, "M"),spannableString,0L));
 
         Calendar calendar1 = Calendar.getInstance();
         calendar1.add(Calendar.DAY_OF_MONTH, 10);

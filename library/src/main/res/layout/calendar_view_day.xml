@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/dayContainer"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -14,8 +15,9 @@
         android:layout_marginTop="4dp"
         android:gravity="center"
         tools:text="19"
+        app:fontFamily="sans-serif"
         android:layout_gravity="center_horizontal"
-        android:textSize="14sp" />
+        android:textSize="16sp" />
 
 
     <ImageView
@@ -37,6 +39,7 @@
         android:id="@+id/valueLabel"
         tools:text="50.0"
         android:layout_width="wrap_content"
+        app:fontFamily="sans-serif-medium"
         android:layout_height="@dimen/day_image_height_bottom"
         android:layout_gravity="center_horizontal"
         android:textSize="12sp"

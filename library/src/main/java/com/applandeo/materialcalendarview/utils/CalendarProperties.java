@@ -1,6 +1,8 @@
 package com.applandeo.materialcalendarview.utils;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import androidx.core.content.ContextCompat;
 
@@ -34,7 +36,7 @@ public class CalendarProperties {
     public static final int CALENDAR_SIZE = 2401;
     public static final int FIRST_VISIBLE_PAGE = CALENDAR_SIZE / 2;
 
-    private int mCalendarType, mHeaderColor, mHeaderLabelColor, mSelectionColor, mTodayLabelColor, mTodayColor,
+    private int mCalendarType, mHeaderLabelColor,mHeaderColor, mSelectionColor, mTodayLabelColor, mTodayColor,
             mDialogButtonsColor, mItemLayoutResource, mDisabledDaysLabelsColor, mHighlightedDaysLabelsColor, mPagesColor,
             mAbbreviationsBarColor, mAbbreviationsLabelsColor, mDaysLabelsColor, mSelectionLabelColor,
             mAnotherMonthsDaysLabelsColor, mHeaderVisibility, mNavigationVisibility, mAbbreviationsBarVisibility, mMaximumDaysRange;
@@ -116,6 +118,7 @@ public class CalendarProperties {
         mHeaderColor = headerColor;
     }
 
+    @SuppressLint("ResourceType")
     public int getHeaderLabelColor() {
         if (mHeaderLabelColor <= 0) {
             return mHeaderLabelColor;

@@ -2,6 +2,8 @@ package com.applandeo.materialcalendarview;
 
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.text.SpannableString;
+
 import androidx.annotation.DrawableRes;
 import androidx.annotation.RestrictTo;
 
@@ -23,7 +25,7 @@ public class EventDay {
     private Object mBottomDrawable;
     private int mLabelColor;
     private long id;
-    private String value;
+    private SpannableString value;
     private boolean mIsDisabled;
 
     /**
@@ -65,7 +67,7 @@ public class EventDay {
         mBottomDrawable=bottomdrawable;
     }
 
-    public EventDay(Calendar day, Drawable drawable,String valueText,Long id) {
+    public EventDay(Calendar day, Drawable drawable,SpannableString valueText,Long id) {
         this.id = id;
         DateUtils.setMidnight(day);
         mDay = day;
@@ -105,7 +107,7 @@ public class EventDay {
         return id;
     }
 
-    public String getValue() {
+    public SpannableString getValue() {
         return value;
     }
 
