@@ -144,7 +144,7 @@ public class DayRowClickListener implements AdapterView.OnItemClickListener {
 
     private void reverseUnselectedColor(SelectedDay selectedDay) {
         DayColorsUtils.setCurrentMonthDayColors(selectedDay.getCalendar(),
-                DateUtils.getCalendar(), (TextView) selectedDay.getView(), mCalendarProperties);
+                DateUtils.isToday(selectedDay.getCalendar()), (TextView) selectedDay.getView(), mCalendarProperties);
     }
 
     private boolean isCurrentMonthDay(Calendar day) {

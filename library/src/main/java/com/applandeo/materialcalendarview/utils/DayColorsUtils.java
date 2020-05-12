@@ -56,13 +56,13 @@ public class DayColorsUtils {
      * a different color and bold face type.
      *
      * @param day                A calendar instance representing day date
-     * @param today              A calendar instance representing today date
+     * @param istoday             istoday
      * @param dayLabel           TextView containing a day numberx
      * @param calendarProperties A resource of a color used to mark today day
      */
-    public static void setCurrentMonthDayColors(Calendar day, Calendar today, TextView dayLabel,
+    public static void setCurrentMonthDayColors(Calendar day, boolean istoday, TextView dayLabel,
                                                 CalendarProperties calendarProperties) {
-        if (today.equals(day)) {
+        if (istoday) {
             setTodayColors(dayLabel, calendarProperties);
         } else if (EventDayUtils.isEventDayWithLabelColor(day, calendarProperties)) {
             setEventDayColors(day, dayLabel, calendarProperties);

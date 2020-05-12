@@ -37,7 +37,7 @@ class CalendarDayAdapter extends ArrayAdapter<Date> {
     private CalendarPageAdapter mCalendarPageAdapter;
     private LayoutInflater mLayoutInflater;
     private int mPageMonth;
-    private Calendar mToday = DateUtils.getCalendar();
+   // private Calendar mToday;
 
     private CalendarProperties mCalendarProperties;
 
@@ -65,38 +65,35 @@ class CalendarDayAdapter extends ArrayAdapter<Date> {
 
         Calendar day = new GregorianCalendar();
         day.setTime(getItem(position));
+        boolean isToday = DateUtils.isToday(day);
 
+        if (mCalendarProperties.getEventDays() != null && mCalendarProperties.getEventsEnabled()) {
 
-        if (mCalendarProperties.getEventDays() == null || !mCalendarProperties.getEventsEnabled()) {
-            return view;
+            Stream.of(mCalendarProperties.getEventDays()).filter(eventDate ->
+                    eventDate.getCalendar().equals(day)).findFirst().executeIfPresent(eventDay -> {
+
+                if (eventDay.getImageDrawable() != null) {
+                    loadIcon(dayIcon, day, eventDay.getImageDrawable());
+                }
+
+                if (eventDay.getImageBottomDrawable() != null) {
+                    loadIcon(dayIcon2, day, eventDay.getImageBottomDrawable());
+                }
+
+                if (eventDay.getValue() != null) {
+                    value.setText(eventDay.getValue());
+                }
+            });
+
         }
 
-        Stream.of(mCalendarProperties.getEventDays()).filter(eventDate ->
-                eventDate.getCalendar().equals(day)).findFirst().executeIfPresent(eventDay -> {
-
-            if (eventDay.getImageDrawable() != null) {
-                loadIcon(dayIcon, day, eventDay.getImageDrawable());
-            }
-
-            if (eventDay.getImageBottomDrawable() != null) {
-                loadIcon(dayIcon2, day, eventDay.getImageBottomDrawable());
-            }
-
-            if (eventDay.getValue() != null) {
-                value.setText(eventDay.getValue());
-            }
-        });
-
-
-
-
-        setLabelColors(dayLabel, day);
+        setLabelColors(dayLabel, day,isToday);
 
         dayLabel.setText(String.valueOf(day.get(Calendar.DAY_OF_MONTH)));
         return view;
     }
 
-    private void setLabelColors(TextView dayLabel, Calendar day) {
+    private void setLabelColors(TextView dayLabel, Calendar day, boolean isToday) {
         // Setting not current month day color
         if (!isCurrentMonthDay(day)) {
             DayColorsUtils.setDayColors(dayLabel, mCalendarProperties.getAnotherMonthsDaysLabelsColor(),
@@ -123,12 +120,12 @@ class CalendarDayAdapter extends ArrayAdapter<Date> {
 
         // Setting custom label color for event day
         if (isEventDayWithLabelColor(day)) {
-            DayColorsUtils.setCurrentMonthDayColors(day, mToday, dayLabel, mCalendarProperties);
+            DayColorsUtils.setCurrentMonthDayColors(day, isToday, dayLabel, mCalendarProperties);
             return;
         }
 
         // Setting current month day color
-        DayColorsUtils.setCurrentMonthDayColors(day, mToday, dayLabel, mCalendarProperties);
+        DayColorsUtils.setCurrentMonthDayColors(day, isToday, dayLabel, mCalendarProperties);
     }
 
     private boolean isSelectedDay(Calendar day) {
