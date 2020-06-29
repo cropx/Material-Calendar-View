@@ -36,7 +36,7 @@ public class CalendarProperties {
     public static final int CALENDAR_SIZE = 2401;
     public static final int FIRST_VISIBLE_PAGE = CALENDAR_SIZE / 2;
 
-    private int mCalendarType, mHeaderLabelColor,mHeaderColor, mSelectionColor, mTodayLabelColor, mTodayColor,
+    private int mCalendarType, mHeaderLabelColor,mHeaderColor, mSelectionColor, mTodayLabelColor,mTodayBackgroundColor, mTodayColor,
             mDialogButtonsColor, mItemLayoutResource, mDisabledDaysLabelsColor, mHighlightedDaysLabelsColor, mPagesColor,
             mAbbreviationsBarColor, mAbbreviationsLabelsColor, mDaysLabelsColor, mSelectionLabelColor,
             mAnotherMonthsDaysLabelsColor, mHeaderVisibility, mNavigationVisibility, mAbbreviationsBarVisibility, mMaximumDaysRange;
@@ -61,6 +61,7 @@ public class CalendarProperties {
     private List<SelectedDay> mSelectedDays = new ArrayList<>();
 
     private Context mContext;
+
 
     public CalendarProperties(Context context) {
         mContext = context;
@@ -169,6 +170,18 @@ public class CalendarProperties {
 
     public void setTodayLabelColor(int todayLabelColor) {
         mTodayLabelColor = todayLabelColor;
+    }
+
+    public void setTodayBackgroundColor(int todayBackgroundColor) {
+        mTodayBackgroundColor = todayBackgroundColor;
+    }
+
+
+    public int getTodayBackgroundColor() {
+        if (mTodayBackgroundColor == 0) {
+            return ContextCompat.getColor(mContext, R.color.defaultTodayBackgroundColor);
+        }
+        return mTodayBackgroundColor;
     }
 
     public int getDialogButtonsColor() {
@@ -427,4 +440,9 @@ public class CalendarProperties {
     public void setTodayColor(int todayColor) {
         mTodayColor = todayColor;
     }
+
+
+
+
+
 }

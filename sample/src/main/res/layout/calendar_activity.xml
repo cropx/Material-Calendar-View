@@ -13,6 +13,8 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         app:type="classic"
+        app:todayLabelColor="@color/white"
+        app:todayBackgroundColor="@color/sampleLighter"
         app:eventsEnabled="true" />
 
     <Button
@@ -24,3 +26,4 @@
         android:text="Set random date" />
 
 </LinearLayout>
+

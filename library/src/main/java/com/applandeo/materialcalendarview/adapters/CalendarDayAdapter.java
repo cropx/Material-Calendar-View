@@ -26,6 +26,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 
 /**
  * This class is responsible for loading a one day cell.
@@ -67,6 +68,7 @@ class CalendarDayAdapter extends ArrayAdapter<Date> {
         day.setTime(getItem(position));
         boolean isToday = DateUtils.isToday(day);
 
+        //here we set the internal icons of the day
         if (mCalendarProperties.getEventDays() != null && mCalendarProperties.getEventsEnabled()) {
 
             Stream.of(mCalendarProperties.getEventDays()).filter(eventDate ->
@@ -87,6 +89,10 @@ class CalendarDayAdapter extends ArrayAdapter<Date> {
 
         }
 
+        //here we set the background of
+        if(isToday){
+            container.setBackgroundColor(mCalendarProperties.getTodayBackgroundColor());
+        }
         setLabelColors(dayLabel, day,isToday);
 
         dayLabel.setText(String.valueOf(day.get(Calendar.DAY_OF_MONTH)));
